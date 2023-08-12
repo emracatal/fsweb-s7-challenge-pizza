@@ -1,3 +1,33 @@
-.home {
-  background-image: url("/Assets/mvp-banner.png");
+.container-home {
+  background-image: url("https://www.colorhexa.com/ce2829.png");
+  /*   background-image: url("/Assets/mvp-banner.png"); */
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: white;
 }
+.teknolojik-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ce2829;
+}
+
+#order-pizza {
+  border: none;
+  border-radius: 1rem;
+  background-color: #fdc913;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.home-slogan h1 {
+}
+/* 
+
+#### Renk Kodları
+
+Sarı #FDC913, Açık Gri: #5F5F5F, Koyu Gri #292929, Kırmızı #CE2829, Bej: #FAF7F2 */

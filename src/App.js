@@ -2,7 +2,6 @@ import React from "react";
 import Home from "./components/Home/Home";
 import OrderPizza from "./components/OrderPizza/OrderPizza";
 import Success from "./components/Success/Success";
-
 import { Switch, Route } from "react-router-dom";
 
 const App = () => {
