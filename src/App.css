@@ -1,5 +1,8 @@
 @import url(components/reset.css);
-
+* {
+  border: 1px solid limegreen;
+  border-collapse: collapse;
+}
 .App {
   text-align: center;
 }
@@ -53,6 +56,42 @@ a {
   flex-direction: column;
   align-items: center;
   background-color: #ce2829;
+}
+.order-body {
+  margin: 1rem 5rem;
+  padding: 1rem;
+}
+
+.pizza-name {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+.price-rate-comment {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.price-rate-comment h2 {
+  font-size: 25px;
+}
+
+.price-rate-comment,
+.story p {
+  font-size: 15px;
+}
+
+.isim-input {
+  width: 500px;
+  height: 20px;
+}
+
+.quantity {
+  display: flex;
+}
+
+.total-bill {
+  color: #ce2829;
 }
 /* 
 
