@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Pizza from "./Pizza";
+/* import * as Yup from "Yup"; */
 
 const extras = [
   { name: "Pepperroni" },
@@ -20,10 +21,47 @@ const extras = [
   { name: "Sarımsak" },
 ];
 
+/* const formSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Must be a valid email address.")
+    .required("Must include email address."),
+  password: Yup.string()
+    .required("Password is Required")
+    .min(6, "Passwords must be at least 6 characters long."),
+  terms: Yup.boolean().oneOf([true], "You must accept Terms and Conditions"),
+  // required isn't required for checkboxes.
+}); */
+
 function OrderPizza() {
   const initialPrice = 85.5;
   const [price, setPrice] = useState(initialPrice);
-  const [quantity, setquantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  const [thickness, setThickness] = useState("thin");
+  const minus = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      setFormState({ ...formState, ["quantity"]: quantity });
+    }
+  };
+  const plus = () => {
+    setQuantity(quantity + 1);
+    setFormState({ ...formState, ["quantity"]: quantity });
+  };
+
+  const [formState, setFormState] = useState({
+    size: "small",
+    thickness: "thin",
+    extras: [],
+    note: "",
+    quantity: 1,
+    price: 85.5,
+  });
+  /* seçimler = ekmalzeme.length * 5 * qtty
+toplam = (boy *qtty) +seçimler */
+  const extratotal = () => {
+    let extratotal = Number(extras.length);
+    return extratotal * quantity * 5;
+  };
 
   return (
     <>
@@ -62,43 +100,55 @@ function OrderPizza() {
         <div className="size">Boyut Seç * </div>
         <div className="size-picker">
           <label>
-            <input type="radio" value="small" />
-            Küçük
+            <input name="size" type="radio" value="small" />
+            Küçük 85,5₺
           </label>
+          <br />
           <label>
-            <input type="radio" value="medium" />
-            Orta
+            <input name="size" type="radio" value="medium" />
+            Orta 135,5₺
           </label>
+          <br />
           <label>
-            <input type="radio" value="large" />
-            Büyük
+            <input name="size" type="radio" value="large" />
+            Büyük 185,5₺
           </label>
         </div>
 
         <div className="thickness">Hamur Seç * </div>
         <div className="thickness-picker">
           <label>
-            Hamur Kalınlığı
-            <select>
-              <option>İnce</option>
-              <option>Kalın</option>
-            </select>
+            <input name="thickness" type="radio" value="thin" />
+            İnce
+          </label>
+          <br />
+          <label>
+            <input name="thickness" type="radio" value="thick" />
+            Kalın
           </label>
         </div>
 
         <div className="extras"> Ek Malzemeler </div>
+        <p>En fazla 10 malzeme seçebilirsiniz.5₺</p>
         <div className="extra-picker">
           {extras.map((item, i) => (
             <div key={i}>
               <label>
-                <input id={i} type="radio" name={item.name} value={item.name} />
+                <input
+                  id={i}
+                  type="checkbox"
+                  name={item.name}
+                  value={item.name}
+                />
                 {item.name}
               </label>
             </div>
           ))}
         </div>
 
-        <div className="note">Sipariş Notu </div>
+        <div className="note" name="extras">
+          Sipariş Notu{" "}
+        </div>
         <input
           className="isim-input"
           type="text"
@@ -106,15 +156,17 @@ function OrderPizza() {
         />
 
         <div className="quantity">
-          <button> - </button>
+          <button onClick={minus}> - </button>
           <h3> {quantity} </h3>
-          <button> + </button>
+          <button onClick={plus}> + </button>
         </div>
 
         <div className="bill-header">Sipariş Toplamı </div>
-        <div className="extra-total">Seçimler:{}TL</div>
-        <div className="total-bill">Toplam:{}TL </div>
-        <button> Sipariş Ver </button>
+        <div className="extra-total">Seçimler:{extratotal()}TL</div>
+        <div className="total-bill">Toplam:{price}TL </div>
+        <button id="confirm-order">
+          <Link to="/Success">Sipariş Ver</Link>
+        </button>
       </main>
     </>
   );
