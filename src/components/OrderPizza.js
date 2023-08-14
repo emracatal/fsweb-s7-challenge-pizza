@@ -33,8 +33,8 @@ const extras = [
 }); */
 
 function OrderPizza() {
-  const initialPrice = 85.5;
-  const [price, setPrice] = useState(initialPrice);
+  const [price, setPrice] = useState(totalprice);
+  const [size, setSize] = useState(85.5);
   const [quantity, setQuantity] = useState(1);
   const [thickness, setThickness] = useState("thin");
   const minus = () => {
@@ -49,8 +49,8 @@ function OrderPizza() {
   };
 
   const [formState, setFormState] = useState({
-    size: "small",
-    thickness: "thin",
+    size: "",
+    thickness: "",
     extras: [],
     note: "",
     quantity: 1,
@@ -62,6 +62,23 @@ toplam = (boy *qtty) +seçimler */
     let extratotal = Number(extras.length);
     return extratotal * quantity * 5;
   };
+
+  const totalprice = () => {
+    return size() * quantity + extratotal();
+  };
+
+  const size = (e) => {
+    if (e.target.value === "large") {
+      setSize(135.5);
+    } else if (e.target.value === "medium") {
+      setSize(185.5);
+    } else {
+      setSize(85.5);
+    }
+  };
+
+  //size onClicked update formState price
+  //setFormState({ ...formState, ["price"]: price });
 
   return (
     <>
@@ -163,7 +180,7 @@ toplam = (boy *qtty) +seçimler */
 
         <div className="bill-header">Sipariş Toplamı </div>
         <div className="extra-total">Seçimler:{extratotal()}TL</div>
-        <div className="total-bill">Toplam:{price}TL </div>
+        <div className="total-bill">Toplam:{totalprice()}TL</div>
         <button id="confirm-order">
           <Link to="/Success">Sipariş Ver</Link>
         </button>
