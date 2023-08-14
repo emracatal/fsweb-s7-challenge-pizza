@@ -64,14 +64,24 @@ toplam = (boy *qtty) +seçimler */
   };
 
   const totalprice = () => {
-    return size() * quantity + extratotal();
+    return size * quantity + extratotal();
   };
 
-  const size = (e) => {
+  const sizeChange = (e) => {
     if (e.target.value === "large") {
-      setSize(135.5);
-    } else if (e.target.value === "medium") {
       setSize(185.5);
+    } else if (e.target.value === "medium") {
+      setSize(135.5);
+    } else {
+      setSize(85.5);
+    }
+  };
+
+  const extraChange = (e) => {
+    if (e.target.value === "large") {
+      setSize(185.5);
+    } else if (e.target.value === "medium") {
+      setSize(135.5);
     } else {
       setSize(85.5);
     }
@@ -117,17 +127,32 @@ toplam = (boy *qtty) +seçimler */
         <div className="size">Boyut Seç * </div>
         <div className="size-picker">
           <label>
-            <input name="size" type="radio" value="small" />
+            <input
+              name="size"
+              type="radio"
+              value="small"
+              onChange={sizeChange}
+            />
             Küçük 85,5₺
           </label>
           <br />
           <label>
-            <input name="size" type="radio" value="medium" />
+            <input
+              name="size"
+              type="radio"
+              value="medium"
+              onChange={sizeChange}
+            />
             Orta 135,5₺
           </label>
           <br />
           <label>
-            <input name="size" type="radio" value="large" />
+            <input
+              name="size"
+              type="radio"
+              value="large"
+              onChange={sizeChange}
+            />
             Büyük 185,5₺
           </label>
         </div>
