@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Pizza from "./Pizza";
-/* import * as Yup from "Yup"; */
+import * as Yup from "yup";
 
 const extras = [
   { name: "Pepperroni" },
