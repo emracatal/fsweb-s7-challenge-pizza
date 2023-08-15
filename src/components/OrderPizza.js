@@ -33,10 +33,10 @@ const extras = [
 }); */
 
 function OrderPizza() {
-  const [price, setPrice] = useState(totalprice);
   const [size, setSize] = useState(85.5);
   const [quantity, setQuantity] = useState(1);
-  const [thickness, setThickness] = useState("thin");
+  const [selectedExtras, setSelectedExtras] = useState([]);
+
   const minus = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -58,9 +58,25 @@ function OrderPizza() {
   });
   /* seçimler = ekmalzeme.length * 5 * qtty
 toplam = (boy *qtty) +seçimler */
+  function handleExtraChange(event) {
+    let extras = [];
+    const { value } = event.target;
+    if (selectedExtras.includes(value)) {
+      // malzeme çıkar
+      extras = selectedExtras.filter((malzeme) => malzeme !== value);
+    } else {
+      // malzeme ekle
+      extras = [...selectedExtras, value];
+    }
+    if (extras.length < 11) {
+      setSelectedExtras(extras);
+      setFormState({ ...formState, ["extras"]: extras });
+    } else {
+    }
+  }
+
   const extratotal = () => {
-    let extratotal = Number(extras.length);
-    return extratotal * quantity * 5;
+    return selectedExtras.length * 5;
   };
 
   const totalprice = () => {
@@ -68,16 +84,6 @@ toplam = (boy *qtty) +seçimler */
   };
 
   const sizeChange = (e) => {
-    if (e.target.value === "large") {
-      setSize(185.5);
-    } else if (e.target.value === "medium") {
-      setSize(135.5);
-    } else {
-      setSize(85.5);
-    }
-  };
-
-  const extraChange = (e) => {
     if (e.target.value === "large") {
       setSize(185.5);
     } else if (e.target.value === "medium") {
@@ -123,92 +129,115 @@ toplam = (boy *qtty) +seçimler */
         <div className="story">
           <p>{Pizza[0].story}</p>
         </div>
-
-        <div className="size">Boyut Seç * </div>
-        <div className="size-picker">
-          <label>
-            <input
-              name="size"
-              type="radio"
-              value="small"
-              onChange={sizeChange}
-            />
-            Küçük 85,5₺
-          </label>
-          <br />
-          <label>
-            <input
-              name="size"
-              type="radio"
-              value="medium"
-              onChange={sizeChange}
-            />
-            Orta 135,5₺
-          </label>
-          <br />
-          <label>
-            <input
-              name="size"
-              type="radio"
-              value="large"
-              onChange={sizeChange}
-            />
-            Büyük 185,5₺
-          </label>
-        </div>
-
-        <div className="thickness">Hamur Seç * </div>
-        <div className="thickness-picker">
-          <label>
-            <input name="thickness" type="radio" value="thin" />
-            İnce
-          </label>
-          <br />
-          <label>
-            <input name="thickness" type="radio" value="thick" />
-            Kalın
-          </label>
-        </div>
-
-        <div className="extras"> Ek Malzemeler </div>
-        <p>En fazla 10 malzeme seçebilirsiniz.5₺</p>
-        <div className="extra-picker">
-          {extras.map((item, i) => (
-            <div key={i}>
+        <div className="size-and-thickness">
+          <div className="size">
+            <div className="size-picker-header">Boyut Seç *</div>
+            <div className="size-picker">
               <label>
                 <input
-                  id={i}
-                  type="checkbox"
-                  name={item.name}
-                  value={item.name}
+                  name="size"
+                  type="radio"
+                  value="small"
+                  onChange={sizeChange}
                 />
-                {item.name}
+                Küçük 85,5₺
+              </label>
+              <br />
+              <label>
+                <input
+                  name="size"
+                  type="radio"
+                  value="medium"
+                  onChange={sizeChange}
+                />
+                Orta 135,5₺
+              </label>
+              <br />
+              <label>
+                <input
+                  name="size"
+                  type="radio"
+                  value="large"
+                  onChange={sizeChange}
+                />
+                Büyük 185,5₺
               </label>
             </div>
-          ))}
+          </div>
+
+          <div className="thickness">
+            <div className="thickness-picker-header">Hamur Seç *</div>
+            <div className="thickness-picker">
+              <label>
+                <input name="thickness" type="radio" value="thin" />
+                İnce
+              </label>
+              <br />
+              <label>
+                <input name="thickness" type="radio" value="thick" />
+                Kalın
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="extras">
+          <div className="extras-header">Ek Malzemeler</div>
+          <p>En fazla 10 malzeme seçebilirsiniz.5₺</p>
+          <div className="extra-picker">
+            {extras.map((item, i) => (
+              <div key={i}>
+                <label>
+                  <input
+                    id={i}
+                    type="checkbox"
+                    name={item.name}
+                    value={item.name}
+                    onChange={handleExtraChange}
+                  />
+                  {item.name}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="note" name="extras">
-          Sipariş Notu{" "}
-        </div>
-        <input
-          className="isim-input"
-          type="text"
-          placeholder="Siparişinize eklemek istediğin bir not var mı?"
-        />
-
-        <div className="quantity">
-          <button onClick={minus}> - </button>
-          <h3> {quantity} </h3>
-          <button onClick={plus}> + </button>
+          <div className="note-header">Sipariş Notu</div>
+          <input
+            className="note-input"
+            type="text"
+            placeholder="Siparişinize eklemek istediğin bir not var mı?"
+          />
         </div>
 
-        <div className="bill-header">Sipariş Toplamı </div>
-        <div className="extra-total">Seçimler:{extratotal()}TL</div>
-        <div className="total-bill">Toplam:{totalprice()}TL</div>
-        <button id="confirm-order">
-          <Link to="/Success">Sipariş Ver</Link>
-        </button>
+        <div className="quantity-and-bill">
+          <div className="quantity">
+            <button onClick={minus}> - </button>
+            <h3> {quantity} </h3>
+            <button onClick={plus}> + </button>
+          </div>
+
+          <div className="bill">
+            <div className="bill-header">Sipariş Toplamı</div>
+
+            <div className="extra-total-top">
+              <div className="extra-total">Seçimler:</div>
+              <div>{extratotal()}TL</div>
+            </div>
+
+            <div className="total-bill-top">
+              <div className="total-bill">Toplam:</div>
+              <div>{totalprice()}TL</div>
+            </div>
+
+            <div className="confirm-order-bttn">
+              <button className="confirm-order" id="confirm-order">
+                <Link to="/Success">Sipariş Ver</Link>
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );

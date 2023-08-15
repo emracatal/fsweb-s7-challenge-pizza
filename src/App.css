@@ -1,8 +1,6 @@
 @import url(components/reset.css);
-* {
-  border: 1px solid limegreen;
-  border-collapse: collapse;
-}
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap");
+
 .App {
   text-align: center;
 }
@@ -23,34 +21,53 @@
   flex-direction: column;
   height: 100vh;
   color: white;
+  font-family: "Barlow", sans-serif;
+  font-size: 50px;
 }
 .teknolojik-logo {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ce2829;
+  padding: 4rem;
 }
-
+main,
+header {
+  font-family: "Barlow", sans-serif;
+}
 #order-pizza {
   border: none;
-  border-radius: 1rem;
+  border-radius: 2rem;
   background-color: #fdc913;
-  padding: 10px 15px;
+  padding: 15px 35px;
 }
 
-.home-slogan h1 {
+.home-slogan h1,
+.container-slogan h1 {
+  text-align: center;
+  margin: 0.5rem 0;
 }
-
+.hero,
+.confirm-order {
+  margin: 0.5rem 0 0 0;
+}
 a {
   text-decoration: none;
   color: black;
+  font-weight: bold;
 }
 
-.navbar {
+.navbar nav {
   display: flex;
   color: white;
+  font-family: "Barlow", sans-serif;
+  font-size: 15px;
 }
 
+.container-orderpizza {
+  display: flex;
+  flex-direction: column;
+}
 .order-header {
   display: flex;
   flex-direction: column;
@@ -58,40 +75,150 @@ a {
   background-color: #ce2829;
 }
 .order-body {
-  margin: 1rem 5rem;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  line-height: 25px;
 }
 
 .pizza-name {
   font-size: 20px;
   display: flex;
   justify-content: center;
+  align-self: baseline;
+  margin: 1.5rem 0;
+  font-family: "Barlow", sans-serif;
+  font-weight: bold;
 }
 .price-rate-comment {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: self-end;
+  margin: 0 0 1.5rem 0;
+  font-family: "Barlow", sans-serif;
+  font-weight: bold;
 }
 
 .price-rate-comment h2 {
   font-size: 25px;
+  font-family: "Barlow", sans-serif;
+  font-weight: bold;
 }
 
 .price-rate-comment,
 .story p {
   font-size: 15px;
+  margin: 0 0 1.5rem 0;
+  font-family: "Barlow", sans-serif;
+  font-weight: lighter;
+}
+.size-picker-header,
+.thickness-picker-header,
+.extras-header,
+.note-header,
+.bill-header {
+  font-size: 20px;
+  font-family: "Barlow", sans-serif;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
 }
 
-.isim-input {
-  width: 500px;
-  height: 20px;
+.bill-header,
+.extra-total-top,
+.total-bill-top {
+  margin: 1rem 2rem 0 2rem;
+}
+.size-picker,
+.thickness-picker,
+.extras p {
+  font-family: "Barlow", sans-serif;
+}
+.size-and-thickness {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 2rem 0;
+}
+.extra-picker {
+  display: flex;
+  flex-flow: wrap;
+  font-family: "Barlow", sans-serif;
+  font-weight: bolder;
+}
+.thickness {
+  margin-left: 15rem;
+}
+
+.extras,
+.note {
+  margin: 0 0 2rem 0;
+}
+.note-input {
+  width: 70vh;
+  height: 40px;
+  margin: 0 1rem 0 0;
 }
 
 .quantity {
-  display: flex;
+  height: 50px;
 }
 
+.quantity button {
+  background-color: #fdc913;
+  border-radius: 0.2rem;
+  border-color: #fdc913;
+  width: 50px;
+  height: 50px;
+}
+
+.quantity h3 {
+  margin: 0 0.3rem;
+  font-weight: bold;
+  align-self: center;
+  margin: 1rem;
+}
+
+.bill {
+  display: flex;
+  flex-direction: column;
+}
+
+.quantity,
+.bill {
+  display: flex;
+  border-color: #fdc913;
+  border: 1px solid #fdc913;
+  border-radius: 0.2rem;
+}
 .total-bill {
   color: #ce2829;
+}
+
+.quantity-and-bill,
+.extra-total-top,
+.total-bill-top {
+  display: flex;
+  justify-content: space-between;
+}
+.quantity-and-bill {
+  padding: 2rem 0 0 0;
+  border-top: 1px solid gray;
+}
+
+.confirm-order {
+  display: flex;
+  justify-content: center;
+  width: 40vh;
+  background-color: #fdc913;
+  padding: 1rem 2rem;
+  font-family: "Barlow", sans-serif;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: #fdc913;
+  margin: 1rem 0 0 0;
+}
+
+.confirm-order-bttn {
+  display: flex;
 }
 /* 
 
