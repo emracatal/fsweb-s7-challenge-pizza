@@ -33,7 +33,7 @@ const extras = [
 }); */
 
 function OrderPizza() {
-  const [size, setSize] = useState(85.5);
+  const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [selectedExtras, setSelectedExtras] = useState([]);
 
@@ -54,7 +54,7 @@ function OrderPizza() {
     extras: [],
     note: "",
     quantity: 1,
-    price: 85.5,
+    price: 0,
   });
   /* seçimler = ekmalzeme.length * 5 * qtty
 toplam = (boy *qtty) +seçimler */
