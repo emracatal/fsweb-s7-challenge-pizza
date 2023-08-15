@@ -214,6 +214,7 @@ toplam = (boy *qtty) +seçimler */
         <div className="customer-info" name="customer-info">
           <div className="customer-info-header">İsim Soyisim Adres</div>
           <input
+            name="customerInfo"
             className="customer-info-input"
             id="name-input"
             type="text"
@@ -242,7 +243,11 @@ toplam = (boy *qtty) +seçimler */
             </div>
 
             <div className="confirm-order-bttn">
-              <button className="confirm-order" id="confirm-order">
+              <button
+                type="submit"
+                className="confirm-order"
+                id="confirm-order"
+              >
                 <Link to="/Success">Sipariş Ver</Link>
               </button>
             </div>
