@@ -115,7 +115,8 @@ a {
 .thickness-picker-header,
 .extras-header,
 .note-header,
-.bill-header {
+.bill-header,
+.customer-info-header {
   font-size: 20px;
   font-family: "Barlow", sans-serif;
   font-weight: bold;
@@ -148,10 +149,12 @@ a {
 }
 
 .extras,
-.note {
+.note,
+.customer-info {
   margin: 0 0 2rem 0;
 }
-.note-input {
+.note-input,
+.customer-info-input {
   width: 70vh;
   height: 40px;
   margin: 0 1rem 0 0;
@@ -210,10 +213,9 @@ a {
   background-color: #fdc913;
   padding: 1rem 2rem;
   font-family: "Barlow", sans-serif;
-  font-weight: bold;
+  font-size: 1.5rem;
   border: none;
   border-radius: 0.2rem;
-  background-color: #fdc913;
   margin: 1rem 0 0 0;
 }
 

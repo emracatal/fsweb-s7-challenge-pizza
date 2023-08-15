@@ -211,6 +211,16 @@ toplam = (boy *qtty) +seçimler */
           />
         </div>
 
+        <div className="customer-info" name="customer-info">
+          <div className="customer-info-header">İsim Soyisim Adres</div>
+          <input
+            className="customer-info-input"
+            id="name-input"
+            type="text"
+            placeholder="İsim Soyisim Adres Girmelisiniz!!"
+          />
+        </div>
+
         <div className="quantity-and-bill">
           <div className="quantity">
             <button onClick={minus}> - </button>
