@@ -183,7 +183,9 @@ a {
   display: flex;
   flex-direction: column;
 }
-
+.invalid-feedback {
+  color: red;
+}
 .quantity,
 .bill {
   display: flex;

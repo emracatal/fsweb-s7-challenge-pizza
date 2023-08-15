@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pizza from "./Pizza";
 import * as Yup from "yup";
+import { FormFeedback } from "reactstrap";
 
 const extras = [
   { name: "Pepperroni" },
@@ -21,56 +22,65 @@ const extras = [
   { name: "Sarımsak" },
 ];
 
-/* const formSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Must be a valid email address.")
-    .required("Must include email address."),
-  password: Yup.string()
-    .required("Password is Required")
-    .min(6, "Passwords must be at least 6 characters long."),
-  terms: Yup.boolean().oneOf([true], "You must accept Terms and Conditions"),
-  // required isn't required for checkboxes.
-}); */
-
 function OrderPizza() {
   const [size, setSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [selectedExtras, setSelectedExtras] = useState([]);
-
-  const minus = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      setFormState({ ...formState, ["quantity"]: quantity });
-    }
-  };
-  const plus = () => {
-    setQuantity(quantity + 1);
-    setFormState({ ...formState, ["quantity"]: quantity });
-  };
-
+  const [formErrors, setFormErrors] = useState({
+    size: "",
+    thickness: "",
+    extras: [],
+    note: "",
+    customerInfo: "",
+    quantity: 1,
+    price: 0,
+  });
+  const [isFormValid, setFormValid] = useState(false);
   const [formState, setFormState] = useState({
     size: "",
     thickness: "",
     extras: [],
     note: "",
+    customerInfo: "",
     quantity: 1,
     price: 0,
   });
+
+  const formSchema = Yup.object().shape({
+    customerInfo: Yup.string()
+      .required("Bilgilerinizi girmelisiniz")
+      .min(10, "En az 10 karakter girmelisiniz"),
+  });
+
+  useEffect(() => {
+    formSchema.isValid(formState).then((valid) => setFormValid(valid));
+  }, [formState]);
+  useEffect(() => {}, [formErrors]);
+
+  const minus = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+      setFormState({ ...formState, quantity });
+    }
+  };
+  const plus = () => {
+    setQuantity(quantity + 1);
+    setFormState({ ...formState, quantity });
+  };
+
   /* seçimler = ekmalzeme.length * 5 * qtty
 toplam = (boy *qtty) +seçimler */
   function handleExtraChange(event) {
     let extras = [];
     const { value } = event.target;
     if (selectedExtras.includes(value)) {
-      // malzeme çıkar
       extras = selectedExtras.filter((malzeme) => malzeme !== value);
     } else {
-      // malzeme ekle
       extras = [...selectedExtras, value];
     }
     if (extras.length < 11) {
       setSelectedExtras(extras);
-      setFormState({ ...formState, ["extras"]: extras });
+      setFormState({ ...formState, extras });
     } else {
     }
   }
@@ -95,6 +105,24 @@ toplam = (boy *qtty) +seçimler */
 
   //size onClicked update formState price
   //setFormState({ ...formState, ["price"]: price });
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+
+    setFormState({
+      ...formState,
+      [name]: inputValue,
+    });
+
+    Yup.reach(formSchema, name)
+      .validate(inputValue)
+      .then((valid) => {
+        setFormErrors({ ...formErrors, [name]: "" });
+      })
+      .catch((err) => {
+        setFormErrors({ ...formErrors, [name]: err.errors[0] });
+      });
+  };
 
   return (
     <>
@@ -214,12 +242,16 @@ toplam = (boy *qtty) +seçimler */
         <div className="customer-info" name="customer-info">
           <div className="customer-info-header">İsim Soyisim Adres</div>
           <input
+            value={formState.customerInfo}
             name="customerInfo"
             className="customer-info-input"
             id="name-input"
             type="text"
             placeholder="İsim Soyisim Adres Girmelisiniz!!"
+            invalid={!!formErrors.customerInfo ? "true" : undefined}
+            onChange={handleInputChange}
           />
+          <FormFeedback>{formErrors.customerInfo}</FormFeedback>
         </div>
 
         <div className="quantity-and-bill">
@@ -245,6 +277,7 @@ toplam = (boy *qtty) +seçimler */
             <div className="confirm-order-bttn">
               <button
                 type="submit"
+                disabled={!isFormValid}
                 className="confirm-order"
                 id="confirm-order"
               >
