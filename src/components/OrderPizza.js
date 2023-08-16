@@ -168,6 +168,7 @@ toplam = (boy *qtty) +seçimler */
             <div className="size-picker">
               <label>
                 <input
+                data-cy="size-small"
                   name="size"
                   type="radio"
                   value="small"
@@ -251,6 +252,7 @@ toplam = (boy *qtty) +seçimler */
         <div className="customer-info" name="customer-info">
           <div className="customer-info-header">İsim Soyisim Adres</div>
           <input
+          data-cy="customerInfo-data"
             value={formState.customerInfo}
             name="customerInfo"
             className="customer-info-input"
@@ -285,6 +287,7 @@ toplam = (boy *qtty) +seçimler */
 
             <div className="confirm-order-bttn">
               <button
+              data-cy="confirm-order-button"
                 disabled={!isFormValid}
                 className="confirm-order"
                 id="confirm-order"
