@@ -15,8 +15,7 @@ body {
 
 .container-home,
 .container-success {
-  background-image: url("https://www.colorhexa.com/ce2829.png");
-  /*   background-image: url("/Assets/mvp-banner.png"); */
+  background-image: url("./components/mvp-banner.png");
   background-size: cover;
   background-position: center;
   align-items: center;
