@@ -50,12 +50,13 @@ function OrderPizza() {
     customerInfo: Yup.string()
       .required("Bilgilerinizi girmelisiniz")
       .min(10, "En az 10 karakter girmelisiniz"),
+    extras: Yup.array().min(1, "asdfsa"),
   });
 
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => setFormValid(valid));
   }, [formState]);
-  useEffect(() => {}, [formErrors]);
+  /*  useEffect(() => {}, [formErrors]); */
 
   const minus = () => {
     if (quantity > 1) {
@@ -276,12 +277,11 @@ toplam = (boy *qtty) +seçimler */
 
             <div className="confirm-order-bttn">
               <button
-                type="submit"
                 disabled={!isFormValid}
                 className="confirm-order"
                 id="confirm-order"
               >
-                <Link to="/Success">Sipariş Ver</Link>
+                Sipariş Ver
               </button>
             </div>
           </div>

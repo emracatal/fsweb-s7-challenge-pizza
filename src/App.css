@@ -1,6 +1,9 @@
 @import url(components/reset.css);
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap");
 
+body {
+  margin: 0 3rem;
+}
 .App {
   text-align: center;
 }
@@ -223,6 +226,10 @@ a {
 
 .confirm-order-bttn {
   display: flex;
+}
+
+.confirm-order-bttn[disabled] {
+  opacity: 0.5;
 }
 /* 
 
