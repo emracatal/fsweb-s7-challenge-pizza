@@ -10,7 +10,7 @@ function Success() {
         ></img>
       </div>
 
-      <div className="container-slogan">
+      <div className="container-slogan" id="tebrikler">
         <h1>TEBRİKLER!</h1>
         <h1>SİPARİŞİNİZ ALINDI</h1>
       </div>

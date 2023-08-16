@@ -17,7 +17,7 @@ function Home() {
       </div>
 
       <div className="hero">
-        <button id="order-pizza">
+        <button data-cy="aciktim-bttn" id="order-pizza">
           <Link to="/OrderPizza">ACIKTIM</Link>
         </button>
       </div>

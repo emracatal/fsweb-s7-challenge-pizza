@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pizza from "./Pizza";
-import * as Yup from "yup";
 import { FormFeedback } from "reactstrap";
+import * as Yup from "yup";
 
 const extras = [
   { name: "Pepperroni" },
@@ -45,12 +45,12 @@ function OrderPizza() {
     quantity: 1,
     price: 0,
   });
-
+  const history = useHistory();
   const formSchema = Yup.object().shape({
     customerInfo: Yup.string()
       .required("Bilgilerinizi girmelisiniz")
       .min(10, "En az 10 karakter girmelisiniz"),
-    extras: Yup.array().min(1, "asdfsa"),
+    extras: Yup.array().max(10, "AWJRİPGFQRG"),
   });
 
   useEffect(() => {
@@ -124,7 +124,11 @@ toplam = (boy *qtty) +seçimler */
         setFormErrors({ ...formErrors, [name]: err.errors[0] });
       });
   };
-
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("Sipariş verildi.", formState);
+    history.push("/Success");
+  };
   return (
     <>
       <header className="order-header">
@@ -234,10 +238,14 @@ toplam = (boy *qtty) +seçimler */
         <div className="note" name="extras">
           <div className="note-header">Sipariş Notu</div>
           <input
+            name="extras"
             className="note-input"
             type="text"
             placeholder="Siparişinize eklemek istediğin bir not var mı?"
+            invalid={!!formErrors.extras ? "true" : undefined}
+            onChange={handleInputChange}
           />
+          <FormFeedback>{formErrors.extras}</FormFeedback>
         </div>
 
         <div className="customer-info" name="customer-info">
@@ -280,6 +288,7 @@ toplam = (boy *qtty) +seçimler */
                 disabled={!isFormValid}
                 className="confirm-order"
                 id="confirm-order"
+                onClick={handleClick}
               >
                 Sipariş Ver
               </button>
