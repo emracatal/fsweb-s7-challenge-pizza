@@ -69,24 +69,10 @@ function OrderPizza() {
   };
 
   /* seçimler = ekmalzeme.length * 5 * qtty
-toplam = (boy *qtty) +seçimler */
-  function handleExtraChange(event) {
-    let extras = [];
-    const { value } = event.target;
-    if (selectedExtras.includes(value)) {
-      extras = selectedExtras.filter((malzeme) => malzeme !== value);
-    } else {
-      extras = [...selectedExtras, value];
-    }
-    if (extras.length < 11) {
-      setSelectedExtras(extras);
-      setFormState({ ...formState, extras });
-    } else {
-    }
-  }
+toplam = (boy *qtty) +s eçimler */
 
   const extratotal = () => {
-    return selectedExtras.length * 5;
+    return selectedExtras.length * 5 * quantity;
   };
 
   const totalprice = () => {
@@ -121,6 +107,21 @@ toplam = (boy *qtty) +seçimler */
         setFormErrors({ ...formErrors, [name]: err.errors[0] });
       });
   };
+
+  function handleExtraChange(event) {
+    let extras = [];
+    const { value } = event.target;
+    if (selectedExtras.includes(value)) {
+      extras = selectedExtras.filter((malzeme) => malzeme !== value);
+    } else {
+      extras = [...selectedExtras, value];
+    }
+    if (extras.length < 11) {
+      setSelectedExtras(extras);
+      setFormState({ ...formState, extras });
+    } else {
+    }
+  }
   const handleClick = (e) => {
     e.preventDefault();
     console.log("Sipariş verildi.", formState);
