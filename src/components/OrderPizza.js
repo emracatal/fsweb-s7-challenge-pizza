@@ -50,13 +50,12 @@ function OrderPizza() {
     customerInfo: Yup.string()
       .required("Bilgilerinizi girmelisiniz")
       .min(10, "En az 10 karakter girmelisiniz"),
-    extras: Yup.array().max(10, "AWJRİPGFQRG"),
+    extras: Yup.array().max(10, "en fazla 10 malzeme ekleyebiliriz"),
   });
 
   useEffect(() => {
     formSchema.isValid(formState).then((valid) => setFormValid(valid));
   }, [formState]);
-  /*  useEffect(() => {}, [formErrors]); */
 
   const minus = () => {
     if (quantity > 1) {
@@ -104,8 +103,6 @@ toplam = (boy *qtty) +seçimler */
     }
   };
 
-  //size onClicked update formState price
-  //setFormState({ ...formState, ["price"]: price });
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === "checkbox" ? checked : value;
@@ -168,7 +165,7 @@ toplam = (boy *qtty) +seçimler */
             <div className="size-picker">
               <label>
                 <input
-                data-cy="size-small"
+                  data-cy="size-small"
                   name="size"
                   type="radio"
                   value="small"
@@ -244,15 +241,13 @@ toplam = (boy *qtty) +seçimler */
             type="text"
             placeholder="Siparişinize eklemek istediğin bir not var mı?"
             invalid={!!formErrors.extras ? "true" : undefined}
-            onChange={handleInputChange}
           />
-          <FormFeedback>{formErrors.extras}</FormFeedback>
         </div>
 
         <div className="customer-info" name="customer-info">
           <div className="customer-info-header">İsim Soyisim Adres</div>
           <input
-          data-cy="customerInfo-data"
+            data-cy="customerInfo-data"
             value={formState.customerInfo}
             name="customerInfo"
             className="customer-info-input"
@@ -287,7 +282,7 @@ toplam = (boy *qtty) +seçimler */
 
             <div className="confirm-order-bttn">
               <button
-              data-cy="confirm-order-button"
+                data-cy="confirm-order-button"
                 disabled={!isFormValid}
                 className="confirm-order"
                 id="confirm-order"
