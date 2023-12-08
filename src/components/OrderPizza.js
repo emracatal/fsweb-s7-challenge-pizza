@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pizza from "./Pizza";
-import { FormFeedback } from "reactstrap";
+import { FormFeedback, FormGroup } from "reactstrap";
 import * as Yup from "yup";
 
 const extras = [
@@ -218,7 +218,7 @@ toplam = (boy *qtty) +s eçimler */
           <p>En fazla 10 malzeme seçebilirsiniz.5₺</p>
           <div className="extra-picker">
             {extras.map((item, i) => (
-              <div key={i}>
+              <FormGroup key={i}>
                 <label>
                   <input
                     id={i}
@@ -229,8 +229,9 @@ toplam = (boy *qtty) +s eçimler */
                   />
                   {item.name}
                 </label>
-              </div>
+              </FormGroup>
             ))}
+            <FormFeedback>{formErrors.extras}</FormFeedback>
           </div>
         </div>
 
